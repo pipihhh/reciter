@@ -82,7 +82,7 @@ def get_urls():
     爬取此网站的所有含有词汇的url
     :return:
     """
-    d = requests.get("https://kaoyan.koolearn.com/20180428/1010928.html")
+    d = requests.get("https://kaoyan.koolearn.com/20190131/1035624.html")
     # print(d.content)
     sp4 = BeautifulSoup(d.content, "html.parser")
     tags = sp4.find_all("td", attrs={"height": "30"})
@@ -167,10 +167,10 @@ if __name__ == '__main__':
         具体的地址看get_urls()
     """
     l = get_urls()
-    wb = openpyxl.load_workbook("C:\\Users\\qq312\\Desktop\\生僻词总结本子.xlsx")
+    wb = openpyxl.load_workbook("/Users/fudongyi/Desktop/words.xlsx")
     s = wb["Sheet1"]
     for url in l:
         get_words(url, s)
-    wb.save("C:\\Users\\qq312\\Desktop\\生僻词总结本子.bak2.xlsx")
+    wb.save("/Users/fudongyi/Desktop/words.xlsx")
     wb.close()
     # get_words("https://kaoyan.koolearn.com/20200114/1064720.html")

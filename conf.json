@@ -1,4 +1,28 @@
 {
-  "pathOfExcel": "C:\\Users\\qq312\\Desktop\\生僻词总结本子.xlsx",
-  "nameOfSheets": ["llyc", "ydspc", "ydcz"]
+  "SHEETS": {
+    "difficulties": true,
+    "llyc1": true,
+    "llyc2": true,
+    "llyc3": true,
+    "pigwei1": true,
+    "ydspc": true,
+    "ydcz": false
+  },
+  "PARTLY_DICT": {
+    "llyc3": {
+      "start": "c",
+      "end": "g",
+      "flag": false
+    },
+    "pigwei1": {
+      "start": "q",
+      "end": "s",
+      "flag": true
+    },
+    "ydspc": {
+      "start": "a",
+      "end": "c",
+      "flag": false
+    }
+  }
 }

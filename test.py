@@ -1,4 +1,5 @@
 import json
+import playsound
 
 
 class Word(object):
@@ -39,9 +40,16 @@ def init_words(d, dic):
     pass
 
 
+def play(f_obj):
+    playsound.playsound("http://media.shanbay.com/audio/us/hello.mp3")
+
+
 if __name__ == '__main__':
-    dic = {}
-    with open("KaoYanluan_1.json", "r", encoding="utf-8") as f:
-        word = f.readline()
-        d = json.loads(word)
-        over_all(d, "")
+    # dic = {}
+    # with open("KaoYanluan_1.json", "r", encoding="utf-8") as f:
+    #     word = f.readline()
+    #     d = json.loads(word)
+    #     over_all(d, "")
+    import requests
+    resp = requests.get("http://media.shanbay.com/audio/us/hello.mp3")
+    play(resp.content)
