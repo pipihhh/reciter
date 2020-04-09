@@ -31,5 +31,6 @@ PARTLY_DICT = {
 MODULE_MAP = {
     "1": "RandomWordGenerator",
     "2": "PartlyWordGenerator",
-    "3": "EmphasizedWordGenerator"
+    "3": "EmphasizedWordGenerator",
+    "4": "RandomlyChooseGenerator"
 }

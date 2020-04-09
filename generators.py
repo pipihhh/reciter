@@ -64,7 +64,7 @@ class RandomWordGenerator(object):
             cell = d["cell"]
             if word in self._difficulties:
                 if word in word_dict:
-                    self._set_bg_color(cell, self._difficulties[word]["forget_times"]+1)
+                    self._set_bg_color(cell, self._difficulties[word]["forget_times"] + 1)
                 else:
                     row, col = set_row_and_col(row, col)
                     self._set_bg_color(cell, self._difficulties[word]["forget_times"])
@@ -153,15 +153,42 @@ class EmphasizedWordGenerator(RandomWordGenerator):
     def init_all_words(cls):
         wb = load_workbook(CONF["pathOfExcel"])
         obj = cls(wb)
-        settings = get_settings()
         for sheet in wb:
-            if sheet.title in settings.sheets and settings.sheets[sheet.title]:
-                row, col = 0, 1
-                while True:
-                    row, col = set_row_and_col(row, col)
-                    cell = sheet.cell(row, col)
-                    if cell.fill.fgColor.rgb != "00000000":
-                        obj.append(cell)
-                    if col > 25:
-                        break
+            row, col = 0, 1
+            while True:
+                row, col = set_row_and_col(row, col)
+                cell = sheet.cell(row, col)
+                if cell.fill.fgColor.rgb != "00000000":
+                    obj.append(cell)
+                if col > 25:
+                    break
         return obj
+
+
+class RandomlyChooseGenerator(RandomWordGenerator):
+    @classmethod
+    def init_all_words(cls):
+        wb = load_workbook(CONF["pathOfExcel"])
+        word_dict = {}
+        word_list = []
+        for sheet in wb:
+            for col in range(1, sheet.max_column + 1, 2):
+                for row in range(1, sheet.max_row + 1):
+                    cell = sheet.cell(row, col)
+                    if cell.value is not None and cell.value not in word_dict:
+                        word_dict[cell.value] = cell
+                        word_list.append(cell.value)
+        offset = get_settings().random_count
+        obj = cls(wb)
+        if offset > len(word_list):
+            RandomlyChooseGenerator.fill(obj, word_dict, word_list)
+        else:
+            from random import shuffle
+            shuffle(word_list)
+            RandomlyChooseGenerator.fill(obj, word_dict, word_list[:offset])
+        return obj
+
+    @staticmethod
+    def fill(obj, word_dict, word_list):
+        for word in word_list:
+            obj.append(word_dict[word])

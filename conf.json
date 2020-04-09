@@ -1,28 +1,29 @@
 {
   "SHEETS": {
     "difficulties": true,
-    "llyc1": true,
-    "llyc2": true,
-    "llyc3": true,
-    "pigwei1": true,
-    "ydspc": true,
+    "llyc1": false,
+    "llyc2": false,
+    "llyc3": false,
+    "pigwei1": false,
+    "ydspc": false,
     "ydcz": false
   },
   "PARTLY_DICT": {
     "llyc3": {
-      "start": "c",
-      "end": "g",
-      "flag": false
-    },
-    "pigwei1": {
-      "start": "q",
-      "end": "s",
+      "start": "a",
+      "end": "i",
       "flag": true
     },
+    "pigwei1": {
+      "start": "o",
+      "end": "s",
+      "flag": false
+    },
     "ydspc": {
-      "start": "a",
-      "end": "c",
+      "start": "m",
+      "end": "m",
       "flag": false
     }
-  }
+  },
+  "RANDOM_COUNT": 50
 }
