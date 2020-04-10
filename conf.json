@@ -1,8 +1,8 @@
 {
   "SHEETS": {
-    "difficulties": true,
+    "difficulties": false,
     "llyc1": false,
-    "llyc2": false,
+    "llyc2": true,
     "llyc3": false,
     "pigwei1": false,
     "ydspc": false,
@@ -12,18 +12,25 @@
     "llyc3": {
       "start": "a",
       "end": "i",
-      "flag": true
+      "flag": false
     },
     "pigwei1": {
-      "start": "o",
-      "end": "s",
+      "start": "s",
+      "end": "u",
       "flag": false
     },
     "ydspc": {
-      "start": "m",
-      "end": "m",
-      "flag": false
+      "start": "a",
+      "end": "o",
+      "flag": true
     }
   },
-  "RANDOM_COUNT": 50
+  "RANDOM_COUNT": 50,
+  "INSERT": {
+    "sheet_name": "ydspc",
+    "font": "STSong",
+    "size": 18,
+    "strict_mode": true
+  },
+  "DIFFICULT_MODE": true
 }

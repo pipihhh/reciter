@@ -5,14 +5,14 @@ CONF = {
 }
 
 COLOR_DICT = {
-    2: "DCE2F1", 3: "E3EDCD", 4: "FFF2E2", 5: "FAF9DE", 6: "FDE6E0", 7: "E9EBFE"
+    2: "FFDCE2F1", 3: "FFE3EDCD", 4: "FFFFF2E2", 5: "FFFAF9DE", 6: "FFFDE6E0", 7: "FFE9EBFE"
 }
 
 # 海天蓝  青草绿  秋叶褐  杏仁黄  胭脂红  葛巾紫
 
 WHITE = "00FFFFFF"
 
-RED = "E9EBFE"
+RED = "FFE9EBFE"
 
 SHEETS = {"difficulties", }
 

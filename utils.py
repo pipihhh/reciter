@@ -1,4 +1,5 @@
 import json
+from conf import COLOR_DICT, CONF
 
 
 def set_row_and_col(row, col):
@@ -67,3 +68,59 @@ def get_settings():
         for k, v in conf.items():
             settings[k] = v
         return settings
+
+
+__COLOR_INDEX = {}
+
+
+def get_index_by_color(color):
+    if len(__COLOR_INDEX):
+        return __COLOR_INDEX.get(color, CONF["fill_threshold"])
+    for idx, clr in COLOR_DICT.items():
+        __COLOR_INDEX[clr] = idx
+    return __COLOR_INDEX.get(color, CONF["fill_threshold"])
+
+
+class Translation(object):
+    def __init__(self, translation):
+        translations = translation.split("\n")
+        self._translation = {}
+        for trans in translations:
+            s, t = trans.split(".")
+            t = t.replace("；", ";")
+            self._translation[s] = t.split(";")
+
+    @property
+    def data(self):
+        return self._translation
+
+    def append(self, translation):
+        for s, t in translation.data.items():
+            if s not in self.data:
+                self._translation[s] = t
+            else:
+                self._translation[s] = Translation._merge_trans(self._translation[s], t)
+
+    @staticmethod
+    def _merge_trans(l1, l2):
+        trans_set = set()
+        for l in l1:
+            trans_set.add(l)
+        for l in l2:
+            trans_set.add(l)
+        return list(trans_set)
+
+    def __str__(self):
+        ret = []
+        for s, t in self._translation.items():
+            ret.append(f"{s}.{';'.join(t)}")
+        return "\n".join(ret)
+
+
+def merge(trans1, trans2):
+    if trans1 == "" or trans2 == "":
+        return trans1 if trans2 == "" else trans2
+    t1 = Translation(trans1)
+    t2 = Translation(trans2)
+    t1.append(t2)
+    return str(t1)

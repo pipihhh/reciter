@@ -1,7 +1,7 @@
 from openpyxl import load_workbook
 from openpyxl.styles import PatternFill
 from openpyxl.comments.comments import Comment
-from utils import set_row_and_col, parse_letter_to_num, get_settings
+from utils import set_row_and_col, parse_letter_to_num, get_settings, get_index_by_color
 import random
 from conf import *
 
@@ -74,6 +74,9 @@ class RandomWordGenerator(object):
                     )
             else:
                 if len(self) <= 0:
+                    if get_settings().difficulty_mode is True:
+                        self.reduce_color_level(cell.value)
+                        continue
                     self._set_bg_color(cell, 0)
         self._wb.save(CONF["pathOfExcel"])
         self._wb.close()
@@ -90,6 +93,16 @@ class RandomWordGenerator(object):
         if cell.value not in self._word_dict and cell.value is not None:
             self._word_dict[cell.value] = {"cell": cell, "work_out_seconds": None}
             self._word_index.append(cell.value)
+
+    def up_color_level(self, w):
+        cell = self._word_dict[w]["cell"]
+        color_idx = get_index_by_color(cell.fill.fgColor.rgb)
+        self._set_bg_color(cell, color_idx + CONF["fill_threshold"] - 1)
+
+    def reduce_color_level(self, w):
+        cell = self._word_dict[w]["cell"]
+        color_idx = get_index_by_color(cell.fill.fgColor.rgb)
+        self._set_bg_color(cell, color_idx + CONF["fill_threshold"] - 3)
 
     @classmethod
     def init_all_words(cls):
